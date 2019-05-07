@@ -47,7 +47,7 @@ function Add-FGTFirewallAddress {
         [ipaddress]$mask,
         [Parameter (Mandatory = $false)]
         [string]$interface,
-		[Parameter (Mandatory = $false)]
+	[Parameter (Mandatory = $false)]
         [string]$vdom,
         [Parameter (Mandatory = $false)]
         [ValidateLength(0, 255)]
@@ -65,11 +65,11 @@ function Add-FGTFirewallAddress {
             Throw "Already an address object using the same name"
         }
 
-		if ($vdom){
-			$uri = "api/v2/cmdb/firewall/address?vdom="+$vdom
-		} else {
-			$uri = "api/v2/cmdb/firewall/address"
-		}
+	if ($vdom){
+	    $uri = "api/v2/cmdb/firewall/address?vdom="+$vdom
+	} else {
+	    $uri = "api/v2/cmdb/firewall/address"
+	}
 
         $address = new-Object -TypeName PSObject
 
@@ -130,7 +130,7 @@ function Copy-FGTFirewallAddress {
         [Parameter (Mandatory = $true, ValueFromPipeline = $true, Position = 1)]
         [ValidateScript( { ValidateFGTAddress $_ })]
         [psobject]$address,
-		[Parameter (Mandatory = $false)]
+	[Parameter (Mandatory = $false)]
         [string]$vdom,
         [Parameter (Mandatory = $true)]
         [string]$name
@@ -141,11 +141,11 @@ function Copy-FGTFirewallAddress {
 
     Process {
 
-		if ($vdom){
-			$uri = "api/v2/cmdb/firewall/address?vdom="+$vdom+"/$($address.name)/?action=clone&nkey=$($name)"  
-		} else {
-			$uri = "api/v2/cmdb/firewall/address/$($address.name)/?action=clone&nkey=$($name)"
-		}
+	if ($vdom){
+	    $uri = "api/v2/cmdb/firewall/address?vdom="+$vdom+"/$($address.name)/?action=clone&nkey=$($name)"  
+	} else {
+	    $uri = "api/v2/cmdb/firewall/address/$($address.name)/?action=clone&nkey=$($name)"
+	}
 		
         $uri = "api/v2/cmdb/firewall/address/$($address.name)/?action=clone&nkey=$($name)"
 
@@ -195,7 +195,7 @@ function Get-FGTFirewallAddress {
         [string]$name,
         [Parameter (Mandatory = $false, ParameterSetName = "match")]
         [string]$match,
-		[Parameter (Mandatory = $false, ParameterSetName = "vdom")]
+	[Parameter (Mandatory = $false, ParameterSetName = "vdom")]
         [string]$vdom,
         [Parameter(Mandatory = $false)]
         [switch]$skip
@@ -211,11 +211,11 @@ function Get-FGTFirewallAddress {
             $invokeParams.add( 'skip', $skip )
         }
 		
-		if ($vdom){
-			$uri = "api/v2/cmdb/firewall/address?vdom="+$vdom
-		} else {
-			$uri = "api/v2/cmdb/firewall/address"
-		}
+	if ($vdom){
+	    $uri = "api/v2/cmdb/firewall/address?vdom="+$vdom
+	} else {
+	    $uri = "api/v2/cmdb/firewall/address"
+	}
 		
         $response = Invoke-FGTRestMethod -uri $uri -method 'GET' @invokeParams
 
@@ -278,7 +278,7 @@ function Set-FGTFirewallAddress {
         [ipaddress]$mask,
         [Parameter (Mandatory = $false)]
         [string]$interface,
-		[Parameter (Mandatory = $false)]
+	[Parameter (Mandatory = $false)]
         [string]$vdom,
         [Parameter (Mandatory = $false)]
         [ValidateLength(0, 255)]
@@ -293,10 +293,10 @@ function Set-FGTFirewallAddress {
     Process {
 
         if ($vdom){
-			$uri = "api/v2/cmdb/firewall/address"+$vdom+"/$($address.name)"  
-		} else {
-			$uri = "api/v2/cmdb/firewall/address/$($address.name)"
-		}
+	    $uri = "api/v2/cmdb/firewall/address"+$vdom+"/$($address.name)"  
+	} else {
+	    $uri = "api/v2/cmdb/firewall/address/$($address.name)"
+	}
 		
         $_address = new-Object -TypeName PSObject
 
@@ -380,7 +380,7 @@ function Remove-FGTFirewallAddress {
         [Parameter (Mandatory = $true, ValueFromPipeline = $true, Position = 1)]
         [ValidateScript( { ValidateFGTAddress $_ })]
         [psobject]$address,
-		[Parameter (Mandatory = $false)]
+	[Parameter (Mandatory = $false)]
         [string]$interface,
         [Parameter(Mandatory = $false)]
         [switch]$noconfirm
@@ -391,11 +391,11 @@ function Remove-FGTFirewallAddress {
 
     Process {
 
-		if ($vdom){
-			$uri = "api/v2/cmdb/firewall/address"+$vdom+"/$($address.name)"  
-		} else {
-			$uri = "api/v2/cmdb/firewall/address/$($address.name)"
-		}
+	if ($vdom){
+	    $uri = "api/v2/cmdb/firewall/address"+$vdom+"/$($address.name)"  
+	} else {
+	    $uri = "api/v2/cmdb/firewall/address/$($address.name)"
+	}
 		
         $uri = "api/v2/cmdb/firewall/address/$($address.name)"
 
